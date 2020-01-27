@@ -6,6 +6,7 @@ import * as serviceWorker from './utils/serviceWorker';
 import {Provider} from 'react-redux'
 import {createStore, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk';
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import reducer from './reducers';
 
 const initState = {};
@@ -13,7 +14,13 @@ const store = createStore(reducer, initState, applyMiddleware(thunk));
 
 ReactDOM.render(
     <Provider store={store}>
-        <App/>
+        <Router>
+            <Switch>
+                <Route exact path="/" component={App}/>
+                <Route exact path="/test/" component={App}/>
+                <Redirect to="/404/" />
+            </Switch>
+        </Router>
     </Provider>,
     document.getElementById('root')
 );
