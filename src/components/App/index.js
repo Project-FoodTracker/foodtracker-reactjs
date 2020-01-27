@@ -1,9 +1,19 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {loadRestaurants} from "../../actions/restaurants";
 import logo from '../../assets/img/logo.svg';
 import './App.scss';
 
 class App extends Component {
+
+    componentDidMount() {
+        this.props.loadRestaurants();
+    }
+
     render() {
+
+        console.log(this.props);
+
         return (
             <div className="App">
                 <header className="App-header">
@@ -25,4 +35,15 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = state => ({
+    restaurants: state.restaurants,
+});
+
+const mapDispatchToProps = {
+    loadRestaurants: loadRestaurants,
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(App);
