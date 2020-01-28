@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/css/index.scss';
-import App from './components/App';
 import * as serviceWorker from './utils/serviceWorker';
-import {Provider} from 'react-redux'
-import {createStore, applyMiddleware} from 'redux'
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import reducer from './reducers';
+
+import Restaurants from "./screens/Restaurants";
 
 const initState = {};
 const store = createStore(reducer, initState, applyMiddleware(thunk));
@@ -16,8 +17,8 @@ ReactDOM.render(
     <Provider store={store}>
         <Router>
             <Switch>
-                <Route exact path="/" component={App}/>
-                <Route exact path="/test/" component={App}/>
+                <Route exact path="/" component={Restaurants}/>
+                <Route exact path="/test/" component={Restaurants}/>
                 <Redirect to="/404/" />
             </Switch>
         </Router>
