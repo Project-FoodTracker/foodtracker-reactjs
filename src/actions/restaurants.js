@@ -1,4 +1,4 @@
-// import Request from '../services/Request';
+import Request from '../services/Request';
 import {RESTAURANTS_SUCCESS, RESTAURANTS_LOADING, RESTAURANTS_ERRORED} from '../constants/restaurants';
 
 function hasErrored(message) {
@@ -31,28 +31,15 @@ export function loadRestaurants(params = null) {
     return (dispatch) => {
         dispatch(isLoading(true));
 
-        // todo: remove testdata
-        setTimeout(() => {
-            dispatch(success([
-                {
-                    title: 'Testdata'
-                },
-                {
-                    title: 'Testdata2'
-                }
-            ]))
-        }, 2000);
+        let request = new Request();
 
-        // todo: implement request
-        // let request = new Request();
-        //
-        // request.get('/restaurants/', params, true).then((data) => {
-        //     dispatch(isLoading(false));
-        //     return data;
-        // }).then((data) => {
-        //     dispatch(success(data));
-        // }).catch((result) => {
-        //     dispatch(hasErrored(result));
-        // });
+        request.get('/restaurants', params, true).then((data) => {
+            dispatch(isLoading(false));
+            return data;
+        }).then((data) => {
+            dispatch(success(data));
+        }).catch((result) => {
+            dispatch(hasErrored(result));
+        });
     };
 }

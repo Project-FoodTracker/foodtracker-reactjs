@@ -1,0 +1,89 @@
+[
+  {
+    "id": "5e31c7518bb66f3f5c3bf0b2",
+    "name": "McDonalds",
+    "street": "McStreet",
+    "number": "1",
+    "postalCode": "3100",
+    "country": "Österreich",
+    "latitude": 47.0631116,
+    "longitude": 15.4341873,
+    "description": "I'm loving it",
+    "openingHours": {
+      "Montag": {
+        "from": "2020-01-29T17:56:33.185+0000",
+        "to": "2020-01-29T17:56:33.185+0000"
+      },
+      "Mittwoch": {
+        "from": "2020-01-29T17:56:33.185+0000",
+        "to": "2020-01-29T17:56:33.185+0000"
+      },
+      "Sonntag": null
+    },
+    "priceClass": "ONE",
+    "images": [
+      {
+        "fileName": "image1.png",
+        "path": "./images"
+      }
+    ]
+  },
+  {
+    "id": "5e31c7518bb66f3f5c3bf0b3",
+    "name": "PeterPan",
+    "street": "Teststraße",
+    "number": "2",
+    "postalCode": "3100",
+    "country": "Österreich",
+    "latitude": 47.03,
+    "longitude": 15.41,
+    "description": "",
+    "openingHours": {
+      "Montag": {
+        "from": "2020-01-29T17:56:33.185+0000",
+        "to": "2020-01-29T17:56:33.185+0000"
+      },
+      "Mittwoch": {
+        "from": "2020-01-29T17:56:33.185+0000",
+        "to": "2020-01-29T17:56:33.185+0000"
+      },
+      "Sonntag": null
+    },
+    "priceClass": "TWO",
+    "images": [
+      {
+        "fileName": "image1.png",
+        "path": "./images"
+      }
+    ]
+  },
+  {
+    "id": "5e31c7518bb66f3f5c3bf0b4",
+    "name": "StarFood",
+    "street": "Starstreet",
+    "number": "99",
+    "postalCode": "4100",
+    "country": "Österreich",
+    "latitude": 47.09,
+    "longitude": 15.46,
+    "description": "Food with class",
+    "openingHours": {
+      "Montag": {
+        "from": "2020-01-29T17:56:33.185+0000",
+        "to": "2020-01-29T17:56:33.185+0000"
+      },
+      "Mittwoch": {
+        "from": "2020-01-29T17:56:33.185+0000",
+        "to": "2020-01-29T17:56:33.185+0000"
+      },
+      "Sonntag": null
+    },
+    "priceClass": "FOUR",
+    "images": [
+      {
+        "fileName": "image1.png",
+        "path": "./images"
+      }
+    ]
+  }
+]
