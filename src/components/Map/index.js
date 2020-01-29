@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Map as GoogleMap, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {Map as GoogleMap, Marker, GoogleApiWrapper} from 'google-maps-react';
 import './Map.scss';
 import config from "../../utils/config";
 import {loadRestaurants} from "../../actions/restaurants";
@@ -40,7 +40,10 @@ class Map extends Component {
     }
 
     render() {
-        console.log(this.props);
+        if (!this.props.restaurants.status) {
+            alert(this.props.restaurants.message);
+        }
+
         return (
             <div className="Map">
                 <GoogleMap
@@ -49,10 +52,38 @@ class Map extends Component {
                     initialCenter={this.state.location}
                     center={this.state.location}
                 >
-
+                    {this.renderMarker()}
                 </GoogleMap>
             </div>
         );
+    }
+
+    renderMarker() {
+        if (!this.props.restaurants.data || this.props.restaurants.data.length <= 0) {
+            return null;
+        }
+
+        let result = [];
+        this.props.restaurants.data.forEach((data, index) => {
+            if (!data.latitude || !data.longitude) {
+                return;
+            }
+
+            result.push(
+                <Marker
+                    key={"marker-" + data.id}
+                    title={data.name}
+                    name={data.name}
+                    position={{
+                        lat: data.latitude,
+                        lng: data.longitude,
+                    }}
+                    onClick={() => alert("klicked " + data.name)}
+                />
+            );
+        });
+
+        return result;
     }
 }
 
