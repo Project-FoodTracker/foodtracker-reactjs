@@ -1,6 +1,7 @@
 export default {
     api: {
         url: 'http://localhost:4999',
+        imageUrl: 'https://via.placeholder.com'
     },
     credentials: {
         googleMaps: {

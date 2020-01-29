@@ -4,7 +4,7 @@ import './Map.scss';
 import config from "../../utils/config";
 import {loadRestaurants} from "../../actions/restaurants";
 import {connect} from "react-redux";
-import {loadRestaurant, openRestaurant} from "../../actions/restaurant";
+import {loadRestaurant, openRestaurant, closeRestaurant} from "../../actions/restaurant";
 
 class Map extends Component {
 
@@ -43,8 +43,17 @@ class Map extends Component {
     }
 
     async onMarkerClick(id) {
-        await this.props.loadRestaurant(id);
-        this.props.openRestaurant();
+        if (this.props.restaurant.open) {
+            this.props.closeRestaurant();
+
+            setTimeout(async () => {
+                await this.props.loadRestaurant(id);
+                this.props.openRestaurant();
+            }, 500);
+        } else {
+            await this.props.loadRestaurant(id);
+            this.props.openRestaurant();
+        }
     }
 
     render() {
@@ -113,6 +122,7 @@ const mapDispatchToProps = {
     loadRestaurants: loadRestaurants,
     loadRestaurant: loadRestaurant,
     openRestaurant: openRestaurant,
+    closeRestaurant: closeRestaurant,
 };
 
 Map = GoogleApiWrapper({
