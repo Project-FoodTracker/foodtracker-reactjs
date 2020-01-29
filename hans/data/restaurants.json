@@ -23,8 +23,8 @@
     "priceClass": "ONE",
     "images": [
       {
-        "fileName": "image1.png",
-        "path": "./images"
+        "fileName": "200x150",
+        "path": "./"
       }
     ]
   },
@@ -52,8 +52,8 @@
     "priceClass": "TWO",
     "images": [
       {
-        "fileName": "image1.png",
-        "path": "./images"
+        "fileName": "200x150",
+        "path": "/"
       }
     ]
   },
@@ -81,8 +81,12 @@
     "priceClass": "FOUR",
     "images": [
       {
-        "fileName": "image1.png",
-        "path": "./images"
+        "fileName": "200x150",
+        "path": "./"
+      },
+      {
+        "fileName": "200x150",
+        "path": "./"
       }
     ]
   }

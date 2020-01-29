@@ -26,13 +26,23 @@ export class Api {
     }
 
     /**
-     * List all cached songs
+     * List all restaurants
      */
     @Get('/restaurants')
     // @Middleware([IsAuthenticated])
-    songs(request) {
+    restaurants(request) {
         let restaurants = this.localState.get('restaurants');
         return new JsonResponse(restaurants);
+    }
+
+    /**
+     * Get one restaurant
+     */
+    @Get('/restaurants/*')
+    // @Middleware([IsAuthenticated])
+    restaurant(request) {
+        let restaurants = this.localState.get('restaurants');
+        return new JsonResponse(restaurants[Math.floor(Math.random() * restaurants.length)]);
     }
 
 }

@@ -1,0 +1,41 @@
+@import "../../assets/scss/variables";
+
+.Restaurant {
+  position: absolute;
+  left: -500px;
+  top: 100px;
+  bottom: 50px;
+  background-color: $color-white;
+  transition: left 0.5s;
+  width: 500px;
+  box-shadow: 2px 4px 7px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 30px;
+
+  &.is--open {
+    left: 30px;
+  }
+
+  .details {
+    .title-wrapper {
+      padding-bottom: 20px;
+      border-bottom: 1px solid;
+
+      .title {
+        font-size: 36px;
+        font-weight: 300;
+      }
+    }
+
+    .address {
+      font-size: 20px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+
+      span {
+        display: inline-block;
+        margin-right: 5px;
+      }
+    }
+  }
+}

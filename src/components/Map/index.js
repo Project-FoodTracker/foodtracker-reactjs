@@ -4,6 +4,7 @@ import './Map.scss';
 import config from "../../utils/config";
 import {loadRestaurants} from "../../actions/restaurants";
 import {connect} from "react-redux";
+import {loadRestaurant, openRestaurant} from "../../actions/restaurant";
 
 class Map extends Component {
 
@@ -16,6 +17,8 @@ class Map extends Component {
                 lng: 15.4341873,
             }
         };
+
+        this.onMarkerClick = this.onMarkerClick.bind(this);
     }
 
     componentDidMount() {
@@ -39,18 +42,32 @@ class Map extends Component {
         );
     }
 
+    async onMarkerClick(id) {
+        await this.props.loadRestaurant(id);
+        this.props.openRestaurant();
+    }
+
     render() {
         if (!this.props.restaurants.status) {
             alert(this.props.restaurants.message);
         }
 
+        let location = this.state.location;
+        if (this.props.restaurant.data && this.props.restaurant.open && this.props.restaurant.data.latitude && this.props.restaurant.data.longitude) {
+            location = {
+                lat: this.props.restaurant.data.latitude,
+                lng: this.props.restaurant.data.longitude,
+            }
+        }
+
         return (
             <div className="Map">
                 <GoogleMap
+                    mapTypeControl={false}
                     google={this.props.google}
                     zoom={14}
                     initialCenter={this.state.location}
-                    center={this.state.location}
+                    center={location}
                 >
                     {this.renderMarker()}
                 </GoogleMap>
@@ -78,7 +95,7 @@ class Map extends Component {
                         lat: data.latitude,
                         lng: data.longitude,
                     }}
-                    onClick={() => alert("klicked " + data.name)}
+                    onClick={() => this.onMarkerClick(data.id)}
                 />
             );
         });
@@ -89,10 +106,13 @@ class Map extends Component {
 
 const mapStateToProps = state => ({
     restaurants: state.restaurants,
+    restaurant: state.restaurant,
 });
 
 const mapDispatchToProps = {
     loadRestaurants: loadRestaurants,
+    loadRestaurant: loadRestaurant,
+    openRestaurant: openRestaurant,
 };
 
 Map = GoogleApiWrapper({

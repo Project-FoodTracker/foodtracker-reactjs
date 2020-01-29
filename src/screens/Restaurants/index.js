@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Header from "../../components/Header";
 import Map from "../../components/Map";
+import Restaurant from "../../components/Restaurant";
 
 class Restaurants extends Component {
 
@@ -9,6 +10,7 @@ class Restaurants extends Component {
             <div className="screen screen-Restaurants">
                 <Header/>
                 <Map/>
+                <Restaurant/>
             </div>
         );
     }
