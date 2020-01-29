@@ -20,7 +20,7 @@ class Header extends Component {
                                 John Doe
                             </div>
                             <div className="user-image">
-                                <img src={require('../../assets/img/user-placeholder.png')}/>
+                                <img alt="user" src={require('../../assets/img/user-placeholder.png')}/>
                             </div>
                         </div>
                     </div>

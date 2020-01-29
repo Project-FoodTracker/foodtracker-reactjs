@@ -1,0 +1,10 @@
+export default {
+    api: {
+        url: 'http://localhost:4999',
+    },
+    credentials: {
+        googleMaps: {
+            key: 'XXXXXXX'
+        }
+    }
+}
