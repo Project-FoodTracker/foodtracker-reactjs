@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './assets/css/index.scss';
 import * as serviceWorker from './utils/serviceWorker';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import reducer from './reducers';
+import './assets/scss/index.scss';
+import 'bootstrap/scss/bootstrap.scss';
 
 import Restaurants from "./screens/Restaurants";
 
@@ -19,7 +20,7 @@ ReactDOM.render(
             <Switch>
                 <Route exact path="/" component={Restaurants}/>
                 <Route exact path="/test/" component={Restaurants}/>
-                <Redirect to="/404/" />
+                <Redirect to="/404/"/>
             </Switch>
         </Router>
     </Provider>,
