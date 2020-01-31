@@ -48,13 +48,17 @@ class Authentication {
 
     /**
      * log the user in
-     * @param key
+     * @param user
+     * @param password
      * @returns {Promise<boolean>}
      */
-    static async logIn(key) {
-        return this.storeLogin('dasistderservertoken', 'Armin Winkler').then(function () {
+    static async logIn(user, password) {
+        if (this.isLoggedIn()) {
             return Promise.resolve(true);
-        });
+        }
+
+        this.storeLogin('dasistderservertoken', 'Armin Winkler');
+        return Promise.resolve(true);
 
 
         // todo if server is running

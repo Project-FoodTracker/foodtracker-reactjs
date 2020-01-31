@@ -10,6 +10,7 @@ import './assets/scss/index.scss';
 import 'bootstrap/scss/bootstrap.scss';
 
 import Restaurants from "./screens/Restaurants";
+import Authentication from "./screens/Authentication";
 
 const initState = {};
 const store = createStore(reducer, initState, applyMiddleware(thunk));
@@ -19,7 +20,7 @@ ReactDOM.render(
         <Router>
             <Switch>
                 <Route exact path="/" component={Restaurants}/>
-                <Route exact path="/test/" component={Restaurants}/>
+                <Route exact path="/login/" component={Authentication}/>
                 <Redirect to="/404/"/>
             </Switch>
         </Router>
