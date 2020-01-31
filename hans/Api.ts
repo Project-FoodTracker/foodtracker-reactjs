@@ -30,7 +30,7 @@ export class Api {
      */
     @Get('/restaurants')
     // @Middleware([IsAuthenticated])
-    restaurants(request) {
+    restaurants() {
         let restaurants = this.localState.get('restaurants');
         return new JsonResponse(restaurants);
     }
@@ -40,7 +40,7 @@ export class Api {
      */
     @Get('/restaurants/*')
     // @Middleware([IsAuthenticated])
-    restaurant(request) {
+    restaurant() {
         let restaurants = this.localState.get('restaurants');
         return new JsonResponse(restaurants[Math.floor(Math.random() * restaurants.length)]);
     }

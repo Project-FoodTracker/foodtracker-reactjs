@@ -51,7 +51,7 @@ class Authentication {
      * @param key
      * @returns {Promise<boolean>}
      */
-    static async logIn(key): Promise {
+    static async logIn(key) {
         return this.storeLogin('dasistderservertoken', 'Armin Winkler').then(function () {
             return Promise.resolve(true);
         });

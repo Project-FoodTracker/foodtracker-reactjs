@@ -33,7 +33,7 @@ function success(data) {
     };
 }
 
-export function loadRestaurant(id: string) {
+export function loadRestaurant(id) {
     return (dispatch) => {
         dispatch(isLoading(true));
 

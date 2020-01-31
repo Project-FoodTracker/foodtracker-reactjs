@@ -6,8 +6,8 @@ class Request {
         this.url = config.api.url;
     }
 
-    get(endpoint, params, auth = false, onlyEndpoint = true): Promise {
-        let url = onlyEndpoint ? this.url + endpoint : endpoint;
+    get(endpoint, params, auth = false) {
+        let url = this.url + endpoint;
 
         if (params != null && params.length !== 0) {
             url += '?' + Request.objectToQueryString(params);
@@ -16,25 +16,25 @@ class Request {
         return this.request(url, 'GET', null, auth);
     }
 
-    post(endpoint, body, auth = false, onlyEndpoint = true): Promise {
-        let url = onlyEndpoint ? this.url + endpoint : endpoint;
+    post(endpoint, body, auth = false) {
+        let url = this.url + endpoint;
 
         return this.request(url, 'POST', body, auth);
     }
 
-    put(endpoint, body, auth = false, onlyEndpoint = true): Promise {
+    put(endpoint, body, auth = false) {
         body._method = 'put';
 
-        return this.post(endpoint, body, auth, onlyEndpoint);
+        return this.post(endpoint, body, auth);
     }
 
-    delete(endpoint, auth = false, onlyEndpoint = true): Promise {
+    delete(endpoint, auth = false) {
         let url = this.url + endpoint;
 
-        return this.request(url, 'DELETE', null, auth, onlyEndpoint);
+        return this.request(url, 'DELETE', null, auth);
     }
 
-    async request(url, method, params, auth = false): Promise {
+    async request(url, method, params, auth = false) {
 
         let headers = {
             'Content-Type': 'application/json',
