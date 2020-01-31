@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+  foodtracker-mongodb:
+    image: mongo:latest
+    restart: always
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    ports:
+      - 27017:27017
+
+  foodtracker-backend:
+    build:
+      context: ../foodtracker-java
+      dockerfile: Dockerfile
+    image: foodtracker-backend
+    ports:
+      - 8080:8080
+    command: mvn clean spring-boot:run
+    depends_on:
+      - foodtracker-mongodb
+
+  foodtracker-frontend:
+    build: ../foodtracker-reactjs
+    command: npm start
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - 3000:3000
+    depends_on:
+      - foodtracker-backend
