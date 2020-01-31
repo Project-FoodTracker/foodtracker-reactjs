@@ -50,8 +50,8 @@ class Request {
 
         return fetch(url, {
             method: method,
-            body: params != null ? Request.objectToQueryString(params) : null,
-            headers: new Headers(headers),
+            body: params != null ? JSON.stringify(params) : null,
+            headers: new Headers(headers)
         })
             .then(response => {
                 if (response.status === 401) {

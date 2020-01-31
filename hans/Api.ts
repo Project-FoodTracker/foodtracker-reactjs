@@ -45,4 +45,18 @@ export class Api {
         return new JsonResponse(restaurants[Math.floor(Math.random() * restaurants.length)]);
     }
 
+    @Post('/register/')
+    register(request) {
+        return new JsonResponse({
+            status: true,
+        })
+    }
+
+    @Post('/authenticate/')
+    login(request) {
+        return new JsonResponse({
+            token: "EXAMPLE TOKEN",
+        })
+    }
+
 }

@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 import AuthenticationService from "../../services/Authentication";
 import Login from "../../components/Login";
+import Register from "../../components/Register";
 
 class Authentication extends Component {
 
@@ -16,11 +17,12 @@ class Authentication extends Component {
             return (<Redirect to="/"/>);
         }
 
-        console.log(this.props);
         return (
             <div className="screen screen-Authentication">
                 <div className="container">
                     <Login />
+                    <hr />
+                    <Register />
                 </div>
             </div>
         );

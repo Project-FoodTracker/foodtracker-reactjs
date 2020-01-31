@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import './Login.scss';
-import {login} from "../../actions/authentication";
+import './Register.scss';
+import {registration} from "../../actions/register";
 import {connect} from "react-redux";
 
-class Login extends Component {
+class Register extends Component {
 
     constructor(props) {
         super(props);
@@ -25,16 +25,33 @@ class Login extends Component {
             return;
         }
 
-        this.props.login(this.state.username, this.state.password);
+        this.props.registration(this.state.username, this.state.password);
+    }
+
+    renderInfo() {
+
+        console.log(this.props);
+        if (!this.props.register.status && !this.props.register.isLoading && !this.props.register.registered) {
+            return (
+                <div className="alert alert-danger">Registration failed. Please try again.</div>
+            )
+        }
+
+        if (this.props.register.status && this.props.register.registered) {
+            return (
+                <div className="alert alert-info">Registration successful. Try to login in.</div>
+            )
+        }
     }
 
     render() {
         return (
-            <div className="Login mt-5">
+            <div className="Register mt-5">
                 <div className="row">
                     <div className="col-md-12">
                         <div className="form-wrapper">
-                            <h2>Login</h2>
+
+                            <h2>Register</h2>
 
                             <form onSubmit={this.handleSubmit} className="form-inline">
                                 <div className="form-group mb-2">
@@ -54,10 +71,11 @@ class Login extends Component {
                                     />
                                 </div>
                                 <div className="form-group mb-2">
-                                    <button type="submit" className="btn btn-primary">Login</button>
+                                    <button type="submit" className="btn btn-primary">Register</button>
                                 </div>
                             </form>
                         </div>
+                        {this.renderInfo()}
                     </div>
                 </div>
             </div>
@@ -66,14 +84,14 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-    authentication: state.authentication,
+    register: state.register,
 });
 
 const mapDispatchToProps = {
-    login: login,
+    registration: registration,
 };
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-)(Login);
+)(Register);

@@ -1,3 +1,4 @@
+import Request from "./Request";
 export const STORE_TOKEN_NAME = 'token';
 export const STORE_USER_NAME = 'user';
 export const STORE_USER_ID = 'user_id';
@@ -57,27 +58,18 @@ class Authentication {
             return Promise.resolve(true);
         }
 
-        this.storeLogin('dasistderservertoken', 'Armin Winkler');
-        return Promise.resolve(true);
-
-
-        // todo if server is running
-        // let request = new Request();
-        // return request.post('/login', {
-        //     email: email,
-        //     password: password
-        // }).then((data) => {
-        //     console.log(data);
-        //
-        //     this.storeLogin(data.data.token, data.data.user).then(function() {
-        //         return Promise.resolve(true);
-        //     });
-        //
-        //     return Promise.reject('Wrong login data.');
-        // }).catch((reason) => {
-        //     console.log(reason);
-        //     return Promise.reject('Wrong login data.');
-        // });
+        let request = new Request();
+        return request.post('/authenticate/', {
+            username: user,
+            password: password
+        }).then((data) => {
+            console.log(data);
+            this.storeLogin(data.token, "Max Mustermann");
+            return Promise.resolve(true);
+        }).catch((reason) => {
+            console.log(reason);
+            return Promise.reject('Wrong login data.');
+        });
     }
 
     /**
