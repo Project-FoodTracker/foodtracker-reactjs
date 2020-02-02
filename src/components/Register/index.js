@@ -29,8 +29,6 @@ class Register extends Component {
     }
 
     renderInfo() {
-
-        console.log(this.props);
         if (!this.props.register.status && !this.props.register.isLoading && !this.props.register.registered) {
             return (
                 <div className="alert alert-danger">Registration failed. Please try again.</div>

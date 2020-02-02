@@ -4,7 +4,9 @@ import {
     RESTAURANT_LOADING,
     RESTAURANT_ERRORED,
     RESTAURANT_CLOSED,
-    RESTAURANT_OPEN, RESTAURANT_RATING, RESTAURANT_RATINGS
+    RESTAURANT_OPEN, RESTAURANT_RATING, RESTAURANT_RATINGS,
+    RESTAURANT_ADD_RATINGS,
+    RESTAURANT_OPEN_RATINGFORM
 } from '../constants/restaurant';
 
 function hasErrored(message) {
@@ -114,4 +116,36 @@ export function closeRestaurant() {
         status: true,
         data: null,
     }
+}
+
+export function openRatingForm(open) {
+    return {
+        type: RESTAURANT_OPEN_RATINGFORM,
+        ratingFormOpen: open,
+    }
+}
+
+function addRatingSuccess() {
+    return {
+        type: RESTAURANT_ADD_RATINGS,
+        addedRating: true,
+    }
+}
+
+export function addRating(restaurant, dish, rating, comment) {
+    return (dispatch) => {
+        let request = new Request();
+        return request.post('/ratings', {
+            restaurant: restaurant,
+            dish: dish,
+            rating: parseInt(rating),
+            comment: comment
+        }, true).then((data) => {
+            dispatch(addRatingSuccess());
+            // dispatch(loadRestaurantRatings(restaurant));
+        }).catch((reason) => {
+            console.log(reason);
+        });
+    };
+
 }

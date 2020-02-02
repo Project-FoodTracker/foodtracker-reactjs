@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
 import './Restaurant.scss';
-import {loadRestaurant, openRestaurant, closeRestaurant} from "../../actions/restaurant";
+import {loadRestaurant, openRestaurant, closeRestaurant, openRatingForm} from "../../actions/restaurant";
 import {connect} from "react-redux";
 import config from "../../utils/config";
 
 class Restaurant extends Component {
+    constructor(props) {
+        super(props);
+
+        this.openRatingForm = this.openRatingForm.bind(this);
+    }
 
     render() {
         return (
@@ -17,6 +22,10 @@ class Restaurant extends Component {
                 </div>
             </div>
         );
+    }
+
+    openRatingForm(bool) {
+        this.props.openRatingForm(bool);
     }
 
     renderDetails() {
@@ -60,6 +69,10 @@ class Restaurant extends Component {
                 {this.renderDetailsImages()}
                 <br/>
                 {this.renderRatings()}
+
+                <button type="button" className="btn btn-info mt-4" onClick={() => this.openRatingForm(true)}>Bewertung
+                    hinzufügen
+                </button>
             </div>
         )
     }
@@ -163,6 +176,7 @@ const mapDispatchToProps = {
     loadRestaurant: loadRestaurant,
     openRestaurant: openRestaurant,
     closeRestaurant: closeRestaurant,
+    openRatingForm: openRatingForm,
 };
 
 export default connect(

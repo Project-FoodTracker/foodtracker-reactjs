@@ -34,7 +34,6 @@ export function login(user, password) {
 
         Authentication.logIn(user, password)
             .then(data => {
-                console.log(data);
                 dispatch(loginIsLoading(false));
                 return data;
             })
