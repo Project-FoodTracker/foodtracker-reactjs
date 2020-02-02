@@ -4,6 +4,7 @@ import {STORE_USER_NAME} from "../../services/Authentication";
 import {setLocation} from "../../actions/map";
 import {logout} from "../../actions/authentication";
 import {connect} from "react-redux";
+import {closeRestaurant, openRestaurantForm} from "../../actions/restaurant";
 
 class Header extends Component {
 
@@ -15,6 +16,11 @@ class Header extends Component {
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.openRestaurantForm = this.openRestaurantForm.bind(this);
+    }
+
+    openRestaurantForm(bool) {
+        this.props.openRestaurantForm(bool);
     }
 
     handleLogout(event) {
@@ -26,6 +32,7 @@ class Header extends Component {
         event.preventDefault();
 
         if(this.state.postalCode.length === 4) {
+            this.props.closeRestaurant();
             this.props.setLocation(this.state.postalCode);
         } else {
             alert("Please enter a valid postal code (e.g. 3100)");
@@ -39,7 +46,11 @@ class Header extends Component {
                     <div className="col-md-4">
                         <div className="brand-logo">
                             Project Foodtracker
+                            <button type="button" className="btn btn-info new-restaurant" onClick={() => this.openRestaurantForm(true)}>
+                                Restaurant hinzufügen
+                            </button>
                         </div>
+
                     </div>
                     <div  className="col-md-4">
                         <form onSubmit={this.handleSubmit}>
@@ -73,6 +84,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     setLocation: setLocation,
+    closeRestaurant: closeRestaurant,
+    openRestaurantForm: openRestaurantForm
 };
 
 export default connect(

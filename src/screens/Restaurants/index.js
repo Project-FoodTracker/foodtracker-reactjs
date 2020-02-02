@@ -5,6 +5,7 @@ import Map from "../../components/Map";
 import Restaurant from "../../components/Restaurant";
 import Authentication from "../../services/Authentication";
 import RatingForm from "../../components/RatingForm";
+import RestaurantForm from "../../components/RestaurantForm";
 
 class Restaurants extends Component {
 
@@ -20,6 +21,7 @@ class Restaurants extends Component {
                 <Map/>
                 <Restaurant/>
                 <RatingForm/>
+                <RestaurantForm/>
             </div>
         );
     }

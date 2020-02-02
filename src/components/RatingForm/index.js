@@ -49,6 +49,10 @@ class RatingForm extends Component {
         ).then(data => {
             this.loadRatings();
         });
+
+        this.state.dish = "";
+        this.state.rating = "";
+        this.state.comment = "";
     }
 
     loadRatings() {

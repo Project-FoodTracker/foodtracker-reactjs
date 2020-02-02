@@ -6,8 +6,10 @@ import {
     RESTAURANT_CLOSED,
     RESTAURANT_OPEN, RESTAURANT_RATING, RESTAURANT_RATINGS,
     RESTAURANT_ADD_RATINGS,
-    RESTAURANT_OPEN_RATINGFORM
+    RESTAURANT_OPEN_RATINGFORM, RESTAURANT_OPEN_FORM, RESTAURANT_ADD
 } from '../constants/restaurant';
+import Geocoder from "react-native-geocoding";
+import config from "../utils/config";
 
 function hasErrored(message) {
     return {
@@ -142,10 +144,53 @@ export function addRating(restaurant, dish, rating, comment) {
             comment: comment
         }, true).then((data) => {
             dispatch(addRatingSuccess());
-            // dispatch(loadRestaurantRatings(restaurant));
         }).catch((reason) => {
             console.log(reason);
         });
     };
+}
 
+export function openRestaurantForm(open) {
+    return {
+        type: RESTAURANT_OPEN_FORM,
+        restaurantFormOpen: open,
+    }
+}
+
+function addRestaurantSuccess() {
+    return {
+        type: RESTAURANT_ADD,
+        addedRestaurant: true,
+    }
+}
+
+export function addRestaurant(name, street, number, postalCode) {
+    return async (dispatch) => {
+        let request = new Request();
+        let lat = "";
+        let lng = "";
+
+        Geocoder.init(config.credentials.googleMaps.key);
+        await Geocoder.from(street + " " + number + " " + postalCode + " Österreich").then(json => {
+                console.log(json);
+                lat = json.results[0].geometry.location.lat;
+                lng = json.results[0].geometry.location.lng;
+            },
+            (error) => {
+                console.log(error.code, error.message);
+            });
+
+        return request.post('/restaurants', {
+            name: name,
+            street: street,
+            number: number,
+            postalCode: postalCode,
+            latitude: lat,
+            longitude: lng
+        }, true).then((data) => {
+            dispatch(addRestaurantSuccess());
+        }).catch((reason) => {
+            console.log(reason);
+        });
+    };
 }

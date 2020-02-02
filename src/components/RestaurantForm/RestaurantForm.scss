@@ -1,0 +1,22 @@
+@import "../../assets/scss/variables";
+
+.RestaurantForm {
+  position: absolute;
+  left: -500px;
+  top: 100px;
+  bottom: 50px;
+  background-color: $color-white;
+  transition: left 0.5s;
+  width: 500px;
+  box-shadow: 2px 4px 7px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 30px;
+
+  &.is--open {
+    left: 570px;
+  }
+
+  .details {
+  }
+
+}
