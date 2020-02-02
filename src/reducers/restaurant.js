@@ -3,7 +3,7 @@ import {
     RESTAURANT_LOADING,
     RESTAURANT_SUCCESS,
     RESTAURANT_OPEN,
-    RESTAURANT_CLOSED,
+    RESTAURANT_CLOSED, RESTAURANT_RATING, RESTAURANT_RATINGS,
 } from '../constants/restaurant';
 
 const initialState = {
@@ -12,6 +12,8 @@ const initialState = {
     data: null,
     message: null,
     open: false,
+    rating: 0.0,
+    ratings: null
 };
 
 export default function (state = initialState, action) {
@@ -23,6 +25,7 @@ export default function (state = initialState, action) {
                 status: action.status,
                 data: action.data,
                 message: action.message,
+                rating: action.rating
             };
 
         case RESTAURANT_LOADING:
@@ -51,6 +54,22 @@ export default function (state = initialState, action) {
                 open: action.open,
                 data: action.data,
                 status: action.status,
+            };
+
+        case RESTAURANT_RATING:
+            return {
+                ...state,
+                status: action.status,
+                isLoading: action.isLoading,
+                rating: action.rating
+            };
+
+        case RESTAURANT_RATINGS:
+            return {
+                ...state,
+                status: action.status,
+                isLoading: action.isLoading,
+                ratings: action.ratings
             };
 
         default:

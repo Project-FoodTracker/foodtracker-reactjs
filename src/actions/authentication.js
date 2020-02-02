@@ -3,7 +3,6 @@ import {
     AUTHENTICATION_LOGIN_ERRORED,
     AUTHENTICATION_LOGIN_LOADING,
     AUTHENTICATION_LOGIN_SUCCESS,
-    AUTHENTICATION_LOGOUT_SUCCESS
 } from "../constants/authentication";
 
 function loginHasErrored(bool) {
@@ -44,16 +43,7 @@ export function login(user, password) {
     };
 }
 
-export function logout(navigator) {
-    navigator.navigate('Auth');
-
-    return (dispatch) => {
-        Authentication.logOut().then((result) => {
-            dispatch(() => {
-                return {
-                    type: AUTHENTICATION_LOGOUT_SUCCESS,
-                };
-            });
-        });
-    };
+export function logout() {
+    localStorage.clear();
+    window.location.reload(true);
 }

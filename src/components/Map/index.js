@@ -4,7 +4,14 @@ import './Map.scss';
 import config from "../../utils/config";
 import {loadRestaurants} from "../../actions/restaurants";
 import {connect} from "react-redux";
-import {loadRestaurant, openRestaurant, closeRestaurant} from "../../actions/restaurant";
+import {
+    loadRestaurant,
+    openRestaurant,
+    closeRestaurant,
+    loadRestaurantRating,
+    loadRestaurantRatings
+} from "../../actions/restaurant";
+import {setLocation} from "../../actions/map";
 
 class Map extends Component {
 
@@ -48,10 +55,14 @@ class Map extends Component {
 
             setTimeout(async () => {
                 await this.props.loadRestaurant(id);
+                await this.props.loadRating(id);
+                await this.props.loadRatings(id);
                 this.props.openRestaurant();
             }, 500);
         } else {
             await this.props.loadRestaurant(id);
+            await this.props.loadRating(id);
+            await this.props.loadRatings(id);
             this.props.openRestaurant();
         }
     }
@@ -61,7 +72,7 @@ class Map extends Component {
             alert(this.props.restaurants.message);
         }
 
-        let location = this.state.location;
+        let location = this.props.map.location;
         if (this.props.restaurant.data && this.props.restaurant.open && this.props.restaurant.data.latitude && this.props.restaurant.data.longitude) {
             location = {
                 lat: this.props.restaurant.data.latitude,
@@ -80,6 +91,7 @@ class Map extends Component {
                 >
                     {this.renderMarker()}
                 </GoogleMap>
+
             </div>
         );
     }
@@ -116,6 +128,7 @@ class Map extends Component {
 const mapStateToProps = state => ({
     restaurants: state.restaurants,
     restaurant: state.restaurant,
+    map: state.map,
 });
 
 const mapDispatchToProps = {
@@ -123,6 +136,9 @@ const mapDispatchToProps = {
     loadRestaurant: loadRestaurant,
     openRestaurant: openRestaurant,
     closeRestaurant: closeRestaurant,
+    loadRating: loadRestaurantRating,
+    loadRatings: loadRestaurantRatings,
+    setLocation: setLocation,
 };
 
 Map = GoogleApiWrapper({

@@ -2,7 +2,6 @@ import {
     AUTHENTICATION_LOGIN_SUCCESS,
     AUTHENTICATION_LOGIN_LOADING,
     AUTHENTICATION_LOGIN_ERRORED,
-    AUTHENTICATION_LOGOUT_SUCCESS,
 } from '../constants/authentication';
 
 const initialState = {
@@ -31,9 +30,6 @@ export default function (state = initialState, action) {
                 isLoading: action.isLoading,
                 status: action.status,
             };
-
-        case AUTHENTICATION_LOGOUT_SUCCESS:
-            return initialState;
 
         default:
             return state;

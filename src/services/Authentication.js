@@ -64,7 +64,7 @@ class Authentication {
             password: password
         }).then((data) => {
             console.log(data);
-            this.storeLogin(data.token, "Max Mustermann");
+            this.storeLogin(data.token, user);
             return Promise.resolve(true);
         }).catch((reason) => {
             console.log(reason);

@@ -4,7 +4,7 @@ import {
     RESTAURANT_LOADING,
     RESTAURANT_ERRORED,
     RESTAURANT_CLOSED,
-    RESTAURANT_OPEN
+    RESTAURANT_OPEN, RESTAURANT_RATING, RESTAURANT_RATINGS
 } from '../constants/restaurant';
 
 function hasErrored(message) {
@@ -33,6 +33,26 @@ function success(data) {
     };
 }
 
+function rating(rating) {
+    return {
+        type: RESTAURANT_RATING,
+        isLoading: false,
+        rating: rating,
+        status: true,
+        message: 'Restaurant rating successfully loaded',
+    };
+}
+
+function ratings(ratings) {
+    return {
+        type: RESTAURANT_RATINGS,
+        isLoading: false,
+        ratings: ratings,
+        status: true,
+        message: 'Restaurant ratings successfully loaded',
+    };
+}
+
 export function loadRestaurant(id) {
     return (dispatch) => {
         dispatch(isLoading(true));
@@ -51,6 +71,30 @@ export function loadRestaurant(id) {
             dispatch(success(data));
         }).catch((result) => {
             dispatch(hasErrored(result));
+        });
+    };
+}
+
+export function loadRestaurantRating(id) {
+    return (dispatch) => {
+        let request = new Request();
+
+        request.get('/ratings/avg/' + id, null, true).then((data) => {
+            return data;
+        }).then((data) => {
+            dispatch(rating(data));
+        });
+    };
+}
+
+export function loadRestaurantRatings(id) {
+    return (dispatch) => {
+        let request = new Request();
+
+        request.get('/ratings/restaurant/' + id, null, true).then((data) => {
+            return data;
+        }).then((data) => {
+            dispatch(ratings(data));
         });
     };
 }
