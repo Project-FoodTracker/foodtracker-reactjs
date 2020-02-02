@@ -24,6 +24,7 @@ class RatingForm extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.loadRatings = this.loadRatings.bind(this);
+        this.openRating = this.openRating.bind(this);
     }
 
     componentDidMount() {
@@ -54,6 +55,10 @@ class RatingForm extends Component {
         this.props.loadRestaurantRatings(this.props.restaurant.data.id);
         this.props.loadRestaurantRating(this.props.restaurant.data.id);
         this.props.openRatingForm(false);
+    }
+
+    openRating(bool) {
+        this.props.openRatingForm(bool);
     }
 
     render() {
@@ -88,7 +93,10 @@ class RatingForm extends Component {
                         />
                     </div>
                     <div className="form-group">
-                        <button type="submit" className="btn btn-primary">Bewertung hinzufügen</button>
+                        <button type="submit" className="btn btn-primary mr-3">Bewertung hinzufügen</button>
+                        <button type="button" className="btn btn-outline-info"
+                                onClick={() => this.openRating(false)}>Schließen
+                        </button>
                     </div>
                 </form>
 
